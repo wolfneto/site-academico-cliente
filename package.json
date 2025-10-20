@@ -1,0 +1,70 @@
+{
+    "name": "client",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "serve": "SET NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service serve",
+        "build": "SET NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service build",
+        "lint": "vue-cli-service lint",
+        "push-dev": "npm run build && git add * && git commit -m 'ajustes' && git push origin main:dev"
+    },
+    "dependencies": {
+        "@fortawesome/fontawesome-free": "5.15.0",
+        "@mdi/font": "5.6.55",
+        "@vueform/slider": "1.0.5",
+        "@vuelidate/core": "2.0.0-alpha.19",
+        "@vuelidate/validators": "2.0.0-alpha.17",
+        "adt-transparent": "1.0.6",
+        "axios": "0.20.0",
+        "bootstrap": "5.0.0-alpha1",
+        "core-js": "3.6.5",
+        "crypto-js": "4.0.0",
+        "decimal.js": "10.3.1",
+        "es6-promise": "4.2.8",
+        "mitt": "2.1.0",
+        "party-js": "2.1.2",
+        "popper.js": "1.16.1",
+        "primeicons": "4.1.0",
+        "primevue": "3.2.0",
+        "qrcode.vue": "3.3.3",
+        "socket.io-client": "4.5.0",
+        "string-mask": "0.3.0",
+        "vue": "3.0.5",
+        "vue-cookies": "1.7.4",
+        "vue-router": "4.0.3",
+        "vue-shepherd": "0.2.1",
+        "vue-the-mask": "0.11.1",
+        "vuelidate": "0.7.6",
+        "vuex": "4.0.0-beta.4"
+    },
+    "devDependencies": {
+        "@vue/cli-plugin-babel": "4.5.0",
+        "@vue/cli-plugin-eslint": "4.5.0",
+        "@vue/cli-plugin-router": "4.5.6",
+        "@vue/cli-service": "4.5.0",
+        "@vue/compiler-sfc": "3.0.5",
+        "babel-eslint": "10.1.0",
+        "eslint": "6.7.2",
+        "eslint-plugin-vue": "7.5.0",
+        "vue-cli-plugin-vuetify": "2.0.7"
+    },
+    "eslintConfig": {
+        "root": true,
+        "env": {
+            "node": true
+        },
+        "extends": [
+            "plugin:vue/vue3-essential",
+            "eslint:recommended"
+        ],
+        "parserOptions": {
+            "parser": "babel-eslint"
+        },
+        "rules": {}
+    },
+    "browserslist": [
+        "> 1%",
+        "last 2 versions",
+        "not dead"
+    ]
+}
