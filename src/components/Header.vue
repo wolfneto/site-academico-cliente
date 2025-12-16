@@ -41,7 +41,7 @@
           >
             DÚVIDAS FREQUENTES
           </div>
-          <div
+          <!-- <div
             @click="fidelidadeEvent()"
             class="
               col
@@ -57,7 +57,7 @@
             "
           >
             FIDELIDADE
-          </div>
+          </div> -->
           <div
             @click="atendimentoEvent()"
             class="

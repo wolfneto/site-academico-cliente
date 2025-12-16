@@ -38,7 +38,7 @@
             type="text" class="form-control input-pesquisa" :style="isFocused || search.length > 0
               ? 'padding: 5px 20px !important;'
               : 'padding: 17px 20px !important;'
-              " :placeholder="isFocused ? '' : 'Procure por sua faculdade!'" v-model="search" />
+              " :placeholder="isFocused ? '' : 'Procure por sua faculdade!!!!'" v-model="search" />
           <span class="input-group-text botao-pesquisar d-flex align-items-center" id="basic-addon1"><i
               class="fas fa-search"></i></span>
         </div>
