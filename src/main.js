@@ -17,15 +17,11 @@ import "primevue/resources/themes/saga-blue/theme.css"      //theme
 import "primevue/resources/primevue.min.css"                //core css
 import "primeicons/primeicons.css"                           //icons
 
-import VueShepherd from 'vue-shepherd';
-
 const myApp = createApp(App)
 
 myApp.config.globalProperties.$axios = axios
 myApp.config.globalProperties.$mask = mask
 myApp.config.globalProperties.$LS = localStorage
-
-myApp.use(VueShepherd)
 myApp.use(ToastService);
 myApp.use(PrimeVue);
 myApp.use(router);
