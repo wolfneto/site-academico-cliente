@@ -8,7 +8,7 @@ RUN npm ci
 
 COPY . .
 
-RUN npm run build
+RUN NODE_OPTIONS=--openssl-legacy-provider npx vue-cli-service build
 
 FROM nginx:1.27-alpine
 
