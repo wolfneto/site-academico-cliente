@@ -40,7 +40,7 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
-      - name: Restart container on VPS with pulled image
+      - name: Deploy to VPS with SSL support
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.VPS_HOST_SOLIDENT }}
@@ -50,13 +50,35 @@ jobs:
           script: |
             set -e
             echo '${{ secrets.GHCR_TOKEN }}' | podman login ghcr.io -u '${{ secrets.GHCR_USERNAME }}' --password-stdin
+            
+            # Create volumes if not exist
+            podman volume create certbot-etc || true
+            podman volume create certbot-var || true
+            
+            # Generate SSL certificate if not exists (first time only)
+            if [ ! -d /var/lib/containers/storage/volumes/certbot-etc/_data/live/academicosolident.com.br ]; then
+              echo "Generating SSL certificate..."
+              podman run --rm \
+                -v certbot-etc:/etc/letsencrypt \
+                -v certbot-var:/var/lib/letsencrypt \
+                -p 80:80 \
+                certbot/certbot certonly --standalone \
+                -d academicosolident.com.br \
+                -d www.academicosolident.com.br \
+                --email ${{ secrets.CERTBOT_EMAIL }} \
+                --agree-tos \
+                --non-interactive
+            fi
+            
+            # Pull and restart container
             podman pull ghcr.io/${{ github.repository_owner }}/site-academico-cliente:latest
             if podman container exists site-academico-cliente; then
               podman rm -f site-academico-cliente
             fi
+            
             podman run -d \
               --name site-academico-cliente \
               --restart=always \
-              -p 8080:8080 \
-              -e PORT=8080 \
+              -p 80:80 -p 443:443 \
+              -v certbot-etc:/etc/letsencrypt:ro \
               ghcr.io/${{ github.repository_owner }}/site-academico-cliente:latest
