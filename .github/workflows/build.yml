@@ -2,7 +2,7 @@ name: Build Check
 
 on:
   pull_request:
-    branches: [main]
+    branches: [solident]
 
 jobs:
   build:
@@ -13,5 +13,5 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18'
-      - run: npm ci 
-      - run: npm run build 
+          cache: npm
+      - run: npm ci
