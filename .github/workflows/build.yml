@@ -15,4 +15,4 @@ jobs:
           node-version: '18'
           cache: npm
       - run: npm ci
-      - run: node --check site-academico-servidor.js
+      - run: node --check site-academico-cliente.js
