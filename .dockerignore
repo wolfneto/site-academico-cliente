@@ -4,6 +4,4 @@ dist
 .gitignore
 npm-debug.log
 yarn-error.log
-README.mdnode_modules
-npm-debug.log
-.git
+README.md
