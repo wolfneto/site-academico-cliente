@@ -1645,7 +1645,7 @@ export default {
     return {
       socket: io(process.env.VUE_APP_URL_BASE, {
         path: process.env.VUE_APP_PATCH_SOCKET,
-        secure: true,
+        secure: process.env.VUE_APP_URL_BASE.startsWith("https"),
         withCredentials: true,
         reconnection: true,
         rejectUnauthorized: false,
