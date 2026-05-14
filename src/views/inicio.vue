@@ -794,17 +794,21 @@ export default {
 }
 
 .faculdade-container {
-  background: var(--secondary);
-  border-radius: 25px;
+  background: linear-gradient(135deg, #ffffff 0%, #f5f9fa 100%);
+  border-radius: 15px;
   padding: 0px;
-  transition: all 0.2s;
+  transition: all 0.3s;
   width: 300px;
   height: 130px;
   cursor: pointer;
+  box-shadow: 0px 4px 12px rgba(26, 127, 139, 0.15);
+  border: 2px solid #e8f4f7;
 }
 
 .faculdade-container:hover {
-  transform: scale(1.1);
+  transform: scale(1.08);
+  box-shadow: 0px 8px 20px rgba(26, 127, 139, 0.25);
+  border-color: #1a7f8b;
 }
 
 .faculdade-background {
@@ -839,14 +843,21 @@ export default {
 }
 
 .botao-faculdade {
-  transition: all 0.2s;
-  font-size: 14px;
-  padding: 3px;
-  border: 2px solid #00000038;
-  border-radius: 25px;
-  box-shadow: 0 0 1em grey;
+  transition: all 0.3s;
+  font-size: 13px;
+  padding: 6px 12px;
+  border: 2px solid transparent;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin: 0px auto 2px auto;
   width: 65%;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.botao-faculdade:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 .faculdade-loader {

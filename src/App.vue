@@ -77,15 +77,19 @@ export default {
 <style>
 :root {
   /* paleta de cores WIP */
-  --primary: #2bbacb;
+  --primary: #1a7f8b;
   --secondary: white;
   --success: rgb(6, 252, 6);
-  --warning: #e9d700;
-  --danger: red;
-  --text: rgb(85, 85, 85);
+  --warning: #ff9800;
+  --danger: #d32f2f;
+  --text: #555555;
 }
 .btn {
   text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
 }
 .form-container {
   max-width: 750px;
@@ -266,15 +270,15 @@ export default {
 }
 
 .form-select:focus {
-  border-color: #65d5e1 !important;
-  box-shadow: 0 0 0 0.2rem rgb(101 213 225 / 45%) !important;
+  border-color: #1a7f8b !important;
+  box-shadow: 0 0 0 0.2rem rgba(26, 127, 139, 0.25) !important;
 }
 .form-select {
   transition: all 0.3s;
 }
 .form-control:focus {
-  border-color: var(--primary);
-  box-shadow: 0 0 0 0.2rem rgb(101 213 225 / 45%) !important;
+  border-color: #1a7f8b;
+  box-shadow: 0 0 0 0.2rem rgba(26, 127, 139, 0.25) !important;
 }
 #nav {
   padding: 30px;

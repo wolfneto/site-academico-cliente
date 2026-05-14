@@ -1603,10 +1603,17 @@ export default {
 }
 .minha-conta {
   margin-left: 1rem;
-  padding: 3px 5px;
-  background: #32a0ad;
-  border-radius: 10px;
-  font-size: 14px;
+  padding: 6px 12px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 15px;
+  font-size: 13px;
+  font-weight: 500;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease;
+}
+.minha-conta:hover {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.5);
 }
 .minha-conta-text:hover .fas,
 .minha-conta-text:hover {
@@ -1628,20 +1635,24 @@ export default {
   position: absolute;
   z-index: 2;
   width: 100%;
-  box-shadow: 0px 0px 20px #00000062;
-  background-color: var(--primary);
+  box-shadow: 0px 4px 12px #0000001a;
+  background: linear-gradient(135deg, #1a7f8b 0%, #2bbacb 100%);
   color: var(--secondary);
+  font-weight: 600;
 }
 .header-options {
   color: var(--secondary);
-  margin: 0px 10px;
-  padding: 0px 5px;
+  margin: 0px 12px;
+  padding: 0px 8px;
   transition: all 0.2s, transform 0.1s;
   min-height: 50px;
-  border-bottom: 2px solid var(--primary);
+  border-bottom: 3px solid transparent;
   cursor: pointer;
   opacity: 1;
   position: relative;
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 0.5px;
 }
 .header-options::after {
   position: absolute;
@@ -1669,14 +1680,15 @@ export default {
   position: absolute;
   bottom: -2px;
   content: "";
-  height: 2px;
+  height: 2px;6px;
+  position: absolute;
+  z-index: 2;
+  display: none;
   width: 100%;
-  background: var(--secondary);
-  transform: scaleX(1);
-  transition: transform ease-out 0.2s;
-}
-.header-mobile {
-  font-size: 18px;
+  box-shadow: 0px 4px 12px #0000001a;
+  background: linear-gradient(135deg, #1a7f8b 0%, #2bbacb 100%);
+  color: var(--secondary);
+  font-weight: 600
   position: absolute;
   z-index: 2;
   display: none;
@@ -1709,6 +1721,19 @@ export default {
 }
 .menu-button {
   transition: all 0.1s;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.menu-button::before {
+  content: "";
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  background-image: url('@/assets/logo.jpeg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 .menu-button:active {
   color: var(--primary);

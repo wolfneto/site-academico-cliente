@@ -2761,11 +2761,19 @@ export default {
   flex-direction: column;
   justify-content: space-between;
   position: relative;
-  border: solid 1px lightgray;
-  border-radius: 10px;
+  border: none;
+  border-radius: 12px;
   margin: 0px 5px;
   padding: 20px;
   height: 400px;
+  background: linear-gradient(135deg, #ffffff 0%, #f5f9fa 100%);
+  box-shadow: 0px 4px 12px rgba(26, 127, 139, 0.12);
+  transition: all 0.3s ease;
+}
+
+.brinde-item:hover {
+  box-shadow: 0px 8px 20px rgba(26, 127, 139, 0.2);
+  transform: translateY(-2px);
 }
 
 .brinde-item-msg {
@@ -3260,17 +3268,21 @@ tr {
 }
 
 .responsive-table-header {
-  padding: 0px 50px;
-  color: black;
-  border-color: #dafafd !important;
+  padding: 12px 20px;
+  color: white;
+  border-color: transparent !important;
   border-style: solid;
-  background-color: #dafafd !important;
-  font-size: 19px;
+  background: linear-gradient(135deg, #1a7f8b 0%, #2bbacb 100%);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
 }
 
 .lista-nome {
   font-size: 16px;
-  font-weight: normal;
+  font-weight: 600;
+  color: #1a3a40;
+  letter-spacing: 0.3px;
 }
 
 .lista-preco {
@@ -3280,15 +3292,15 @@ tr {
 }
 
 .lista-preco .preco-original {
-  color: #e0e0e0;
+  color: #b3d9e0;
   text-decoration: line-through;
   font-size: 13px;
   margin-right: 4px;
 }
 
 .lista-preco .preco-final {
-  color: #ffeb3b;
-  font-weight: 600;
+  color: #ffffff;
+  font-weight: 700;
 }
 
 /* Ajuste para telas muito pequenas */

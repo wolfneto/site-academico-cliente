@@ -95,19 +95,23 @@ export default {
 
 <style scoped>
 .painel {
-  transition: box-shadow 0.2s;
-  box-shadow: 0px 0px 15px #00000062;
-  border-radius: 10px;
+  transition: all 0.3s ease;
+  box-shadow: 0px 4px 12px rgba(26, 127, 139, 0.12);
+  border-radius: 15px;
+  background: linear-gradient(135deg, #ffffff 0%, #f5f9fa 100%);
 }
 .painel:hover {
-  box-shadow: 0px 0px 30px #00000062;
+  box-shadow: 0px 8px 20px rgba(26, 127, 139, 0.2);
+  transform: translateY(-2px);
 }
 .painel-header {
-  padding: 4px 8px;
-  background-color: #2bbacb;
+  padding: 16px 12px;
+  background: linear-gradient(135deg, #1a7f8b 0%, #2bbacb 100%);
   color: white;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
 }
 
 .text-margin {
@@ -118,12 +122,15 @@ export default {
   margin-left: 10px;
   margin-top: 20px;
   display: inline-block;
-  color: black;
+  color: #1a3a40;
+  font-weight: 600;
+  letter-spacing: 0.3px;
 }
 .resposta {
   margin: 10px;
   display: inline-block;
-  color: #696969;
+  color: #555555;
+  line-height: 1.6;
 }
 @media only screen and (max-device-width: 600px) {
   .text-margin {
