@@ -1680,7 +1680,7 @@ export default {
   position: absolute;
   bottom: -2px;
   content: "";
-  height: 2px;6px;
+  height: 2px;;
   position: absolute;
   z-index: 2;
   display: none;
