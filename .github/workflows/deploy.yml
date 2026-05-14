@@ -67,6 +67,6 @@ jobs:
               --name site-academico-cliente \
               --restart=always \
               --network solident-network \
-              -p 80:80 -p 443:443 \
+              -p 9000:9000 -p 443:443 \
               -v certbot-etc:/etc/letsencrypt:ro \
               ghcr.io/${{ github.repository_owner }}/site-academico-cliente:latest
