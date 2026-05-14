@@ -55,22 +55,6 @@ jobs:
             podman volume create certbot-etc || true
             podman volume create certbot-var || true
             
-            # Generate SSL certificate if not exists (first time only)
-            CERT_PATH="/var/lib/containers/storage/volumes/certbot-etc/_data/live/academicosolident.com.br"
-            if [ ! -d "$CERT_PATH" ]; then
-              echo "Generating SSL certificate..."
-              podman run --rm \
-                -v certbot-etc:/etc/letsencrypt \
-                -v certbot-var:/var/lib/letsencrypt \
-                -p 80:80 \
-                docker.io/certbot/certbot:latest certonly --standalone \
-                -d academicosolident.com.br \
-                -d www.academicosolident.com.br \
-                --email admin@academicosolident.com.br \
-                --agree-tos \
-                --non-interactive || echo "Certificate generation skipped or already exists"
-            fi
-            
             # Pull and restart container
             podman pull ghcr.io/${{ github.repository_owner }}/site-academico-cliente:latest
             if podman container exists site-academico-cliente; then
