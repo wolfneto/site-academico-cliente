@@ -1681,21 +1681,10 @@ export default {
   bottom: -2px;
   content: "";
   height: 2px;
-  position: absolute;
-  z-index: 2;
-  display: none;
   width: 100%;
-  box-shadow: 0px 4px 12px #0000001a;
-  background: linear-gradient(135deg, #1a7f8b 0%, #2bbacb 100%);
-  color: var(--secondary);
-  font-weight: 600
-  position: absolute;
-  z-index: 2;
-  display: none;
-  width: 100%;
-  box-shadow: 0px 0px 20px #00000062;
-  background-color: var(--primary);
-  color: var(--secondary);
+  background: var(--secondary);
+  transform: scaleX(1);
+  transition: transform ease-out 0.2s;
 }
 .header-options-mobile {
   transition: all 0.2s;
