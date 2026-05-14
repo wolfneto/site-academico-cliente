@@ -1719,7 +1719,7 @@ export default {
   display: inline-block;
   width: 40px;
   height: 40px;
-  background-image: url('@/assets/logo.jpeg');
+  background-image: url('../assets/logo.jpeg');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
