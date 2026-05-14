@@ -3,7 +3,7 @@ name: Deploy to VPS
 on:
   push:
     branches:
-      - solident
+      - dental_academico
 
 permissions:
   contents: read
@@ -43,10 +43,10 @@ jobs:
       - name: Deploy to VPS with SSL support
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: ${{ secrets.VPS_HOST_SOLIDENT }}
-          port: ${{ secrets.VPS_PORT_SOLIDENT }}
-          username: ${{ secrets.VPS_USER_SOLIDENT }}
-          password: ${{ secrets.VPS_PASS_SOLIDENT }}
+          host: ${{ secrets.VPS_HOST_DENTAL_ACADEMICO }}
+          port: ${{ secrets.VPS_PORT_DENTAL_ACADEMICO }}
+          username: ${{ secrets.VPS_USER_DENTAL_ACADEMICO }}
+          password: ${{ secrets.VPS_PASS_DENTAL_ACADEMICO }}
           script: |
             set -e
             echo '${{ secrets.GHCR_TOKEN }}' | podman login ghcr.io -u '${{ secrets.GHCR_USERNAME }}' --password-stdin
