@@ -3,28 +3,86 @@ name: Deploy to VPS
 on:
   push:
     branches:
-      - main
+      - solident
+
+permissions:
+  contents: read
+  packages: write
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      # Build 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
         with:
-          node-version: '18'
-      - run: npm ci # ou yarn
-      - run: npm run build # ou seu comando de build
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
-      # Deploy via SCP
-      - name: Deploy files to VPS
-        uses: appleboy/scp-action@v0.1.7
+      - name: Extract image metadata
+        id: meta
+        uses: docker/metadata-action@v5
         with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USER }}
-          password: ${{ secrets.VPS_PASS }}
-          source: "build/"              
-          target: "/var/www/NOME-DO-PROJETO"
+          images: ghcr.io/${{ github.repository_owner }}/site-academico-cliente
+          tags: |
+            type=raw,value=latest
+            type=sha
+
+      - name: Build and push image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+
+      - name: Deploy to VPS with SSL support
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_HOST_SOLIDENT }}
+          port: ${{ secrets.VPS_PORT_SOLIDENT }}
+          username: ${{ secrets.VPS_USER_SOLIDENT }}
+          password: ${{ secrets.VPS_PASS_SOLIDENT }}
+          script: |
+            set -e
+            echo '${{ secrets.GHCR_TOKEN }}' | podman login ghcr.io -u '${{ secrets.GHCR_USERNAME }}' --password-stdin
+            
+            # Create volumes if not exist
+            podman volume create certbot-etc || true
+            podman volume create certbot-var || true
+            
+            # Generate SSL certificate if not exists (first time only)
+            CERT_PATH="/var/lib/containers/storage/volumes/certbot-etc/_data/live/academicosolident.com.br"
+            if [ ! -d "$CERT_PATH" ]; then
+              echo "Generating SSL certificate..."
+              podman run --rm \
+                -v certbot-etc:/etc/letsencrypt \
+                -v certbot-var:/var/lib/letsencrypt \
+                -p 80:80 \
+                docker.io/certbot/certbot:latest certonly --standalone \
+                -d academicosolident.com.br \
+                -d www.academicosolident.com.br \
+                --email admin@academicosolident.com.br \
+                --agree-tos \
+                --non-interactive || echo "Certificate generation skipped or already exists"
+            fi
+            
+            # Pull and restart container
+            podman pull ghcr.io/${{ github.repository_owner }}/site-academico-cliente:latest
+            if podman container exists site-academico-cliente; then
+              podman rm -f site-academico-cliente
+            fi
+            
+            podman network exists solident-network || podman network create solident-network
+
+            podman run -d \
+              --name site-academico-cliente \
+              --restart=always \
+              --network solident-network \
+              -p 80:80 -p 443:443 \
+              -v certbot-etc:/etc/letsencrypt:ro \
+              ghcr.io/${{ github.repository_owner }}/site-academico-cliente:latest
