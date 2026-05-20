@@ -2052,7 +2052,7 @@ export default {
     async inicializarPayPal() {
       try {
         const clientToken = await this.$axios.get(
-          "https://solident.com.br/node/paypal_client_token"
+          "/link/api/paypal_client_token"
         );
         // eslint-disable-next-line no-undef
         braintree.dropin.create(
@@ -2077,7 +2077,7 @@ export default {
 
           try {
             const res = this.$axios.get(
-              "https://solident.com.br/node/paypal_client_token",
+              "/link/api/paypal_client_token",
               {
                 paymentMethodNonce: payload.nonce,
                 amount: parseFloat(
