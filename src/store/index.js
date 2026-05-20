@@ -1073,7 +1073,7 @@ export default createStore({
     },
     // falta testar FALTA TESTAR OPORRA VE SE TA TUDOI UPDATE LA NO SERVIDOR PAGAMENTO E GG TESTAR
     async criar_pix_cseis(context, payload) {
-      let retorno = await axios.post("https://solident.com.br/node/pix_cseis", {
+      let retorno = await axios.post("/link/api/pix_cseis", {
         data: crypto.encrypt(payload, true),
       });
       retorno.data.banco = 'C6'
@@ -2074,7 +2074,7 @@ export default createStore({
       try {
         if (navigator.onLine) {
           let retorno = await axios.post(
-            "https://solident.com.br/node/cancelarIugu"
+            "/link/api/pagamento/cancelar"
           );
           retorno = retorno.data;
           console.log("RETORNO", retorno);
@@ -2106,7 +2106,7 @@ export default createStore({
     async get_iugu(context, payload) {
       try {
         if (navigator.onLine) {
-          let retorno = await axios.post("https://solident.com.br/node/pagbank", {
+          let retorno = await axios.post("/link/api/pagbank", {
             data: crypto.encrypt(payload, true),
           });
           retorno = retorno.data;
