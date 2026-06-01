@@ -957,6 +957,7 @@ export default {
         this.$router.push({
           name: "inicio",
         });
+        return;
       }
       if (this.objToStore.session.aluno.pontos == null)
         this.objToStore.session.aluno.pontos = 0;
