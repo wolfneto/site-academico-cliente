@@ -11,8 +11,8 @@
       <div id="avisos-container">
         <div id="avisos-inside">
           <span id="avisos-span" v-if="semestre.descri_semestre != undefined" style="color: red">
-            AVISOS {{ faculdade.nome_exibicao_faculdade.toUpperCase() }} -
-            {{ semestre.descri_semestre.toUpperCase() }}</span>
+            AVISOS {{ (faculdade.nome_exibicao_faculdade || '').toUpperCase() }} -
+            {{ (semestre.descri_semestre || '').toUpperCase() }}</span>
           <div v-for="aviso in avisos" :key="aviso.id_aviso">
             <div v-html="aviso.mensagem_aviso"></div>
           </div>
@@ -29,12 +29,12 @@
         <div class="sidenav-lista-container">
           <div class="row" style="margin: 0px 0px 17px 0px" v-for="lista in objToStore.session.carrinho.listas"
             :key="lista.id_lista">
-            <div :title="lista.nome_exibi_lista.toUpperCase()" style="
+            <div :title="(lista.nome_exibi_lista || '').toUpperCase()" style="
                 white-space: nowrap;
                 text-overflow: ellipsis;
                 overflow-x: hidden;
               " class="col-12">
-              {{ lista.nome_exibi_lista.toUpperCase() }}
+              {{ (lista.nome_exibi_lista || '').toUpperCase() }}
             </div>
             <div style="font: size 0.7rem">
               Itens selecionados:
@@ -59,16 +59,16 @@
         <div style="border-top: 1px solid LightGrey; padding: 5px" class="text-center ; mb-2">
           <span v-if="objToStore.session.carrinho.listas.length > 0 && semestre.id_semestre != 596">
             {{
-              objToStore.session.carrinho.faculdade.nome_exibicao_faculdade.toUpperCase()
+              (objToStore.session.carrinho.faculdade.nome_exibicao_faculdade || '').toUpperCase()
             }}
             <br />
             {{
-              objToStore.session.carrinho.semestre.descri_semestre.toUpperCase()
+              (objToStore.session.carrinho.semestre.descri_semestre || '').toUpperCase()
             }}
           </span>
           <span v-if="objToStore.session.carrinho.listas.length == 0 && semestre.id_semestre != 596">
-            {{ faculdade.nome_exibicao_faculdade.toUpperCase() }} <br />
-            {{ semestre.descri_semestre.toUpperCase() }}
+            {{ (faculdade.nome_exibicao_faculdade || '').toUpperCase() }} <br />
+            {{ (semestre.descri_semestre || '').toUpperCase() }}
           </span>
         </div>
         <span style="font-weight: bold">ITENS SELECIONADOS: </span> <br />
@@ -582,16 +582,16 @@
               </div>
               <span v-if="objToStore.session.carrinho.listas.length > 0 && semestre.id_semestre != 596">
                 {{
-                  objToStore.session.carrinho.faculdade.nome_exibicao_faculdade.toUpperCase()
+                  (objToStore.session.carrinho.faculdade.nome_exibicao_faculdade || '').toUpperCase()
                 }}
                 <br />
                 {{
-                  objToStore.session.carrinho.semestre.descri_semestre.toUpperCase()
+                  (objToStore.session.carrinho.semestre.descri_semestre || '').toUpperCase()
                 }}
               </span>
               <span v-if="objToStore.session.carrinho.listas.length == 0 && semestre.id_semestre != 596">
-                {{ faculdade.nome_exibicao_faculdade.toUpperCase() }} <br />
-                {{ semestre.descri_semestre.toUpperCase() }}
+                {{ (faculdade.nome_exibicao_faculdade || '').toUpperCase() }} <br />
+                {{ (semestre.descri_semestre || '').toUpperCase() }}
               </span>
               <!-- if saldao ideia do wolf -->
               <br v-if="semestre.id_semestre != 596" />
@@ -891,13 +891,13 @@
         <div v-if="semestre.id_semestre != 596" class="col-6 text-center pr-3 mt-2"
           style="border-right: 1px solid LightGrey; font-weight: bold">
           {{
-            objToStore.session.carrinho.faculdade.nome_exibicao_faculdade.toUpperCase()
+            (objToStore.session.carrinho.faculdade.nome_exibicao_faculdade || '').toUpperCase()
           }}
         </div>
         <!-- if saldao ideia do wolf -->
         <div v-if="semestre.id_semestre != 596" class="col-6 text-center pl-3 mt-2" style="font-weight: bold">
           {{
-            objToStore.session.carrinho.semestre.descri_semestre.toUpperCase()
+            (objToStore.session.carrinho.semestre.descri_semestre || '').toUpperCase()
           }}
         </div>
         <div class="col-12 mt-2" style="font-weight: bold">

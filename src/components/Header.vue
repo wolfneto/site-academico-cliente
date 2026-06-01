@@ -228,7 +228,7 @@
             :key="lista.id_lista"
           >
             <div
-              :title="lista.nome_exibi_lista.toUpperCase()"
+              :title="(lista.nome_exibi_lista || '').toUpperCase()"
               style="
                 white-space: nowrap;
                 text-overflow: ellipsis;
@@ -236,7 +236,7 @@
               "
               class="col-12"
             >
-              {{ lista.nome_exibi_lista.toUpperCase() }}
+              {{ (lista.nome_exibi_lista || '').toUpperCase() }}
             </div>
             <div style="font: size 0.7rem">
               Itens selecionados:
@@ -272,19 +272,19 @@
         >
           <span v-if="objToStore.session.carrinho.listas.length > 0">
             {{
-              objToStore.session.carrinho.faculdade.nome_exibicao_faculdade.toUpperCase()
+              (objToStore.session.carrinho.faculdade.nome_exibicao_faculdade || '').toUpperCase()
             }}
             <br />
             {{
-              objToStore.session.carrinho.semestre.descri_semestre.toUpperCase()
+              (objToStore.session.carrinho.semestre.descri_semestre || '').toUpperCase()
             }}
           </span>
           <span v-if="objToStore.session.carrinho.listas.length == 0">
             {{
-              objToStore.session.faculdade.nome_exibicao_faculdade.toUpperCase()
+              (objToStore.session.faculdade.nome_exibicao_faculdade || '').toUpperCase()
             }}
             <br />
-            {{ objToStore.session.semestre.descri_semestre.toUpperCase() }}
+            {{ (objToStore.session.semestre.descri_semestre || '').toUpperCase() }}
           </span>
         </div>
         <span style="font-weight: bold">ITENS SELECIONADOS: </span> <br />
