@@ -926,6 +926,7 @@ export default {
   async created() {
     this.loading = true;
     this.getSession();
+    if (this.objToStore.session.aluno == null) { this.loading = false; return; }
     await this.get_fidelidade(this.objToStore.session.aluno.cpf);
     if (!this.error) {
       this.produtos = this.fidelidade.produtos;
@@ -957,6 +958,7 @@ export default {
         this.$router.push({
           name: "inicio",
         });
+        return;
       }
       if (this.objToStore.session.aluno.pontos == null)
         this.objToStore.session.aluno.pontos = 0;

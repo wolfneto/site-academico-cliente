@@ -976,7 +976,7 @@
             <td style="word-break: break-all; width: 50%">
               <span style="color: #636262">
                 {{
-                  pedidoDetalhes.pagamentos_cartao_credito.bandeira.toUpperCase()
+                  (pedidoDetalhes.pagamentos_cartao_credito.bandeira || '').toUpperCase()
                 }}
               </span>
             </td>

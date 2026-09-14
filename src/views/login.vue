@@ -10,13 +10,13 @@
                 class="col-6 text-right pr-3"
                 style="border-right: 1px solid LightGrey; font-weight: bold"
               >
-                {{
-                  objToStore.session.carrinho.faculdade.nome_exibicao_faculdade.toUpperCase()
-                }}
+              {{
+                (objToStore.session.carrinho.faculdade.nome_exibicao_faculdade || '').toUpperCase()
+              }}
               </div>
               <div class="col-6 text-left pl-3" style="font-weight: bold">
                 {{
-                  objToStore.session.carrinho.semestre.descri_semestre.toUpperCase()
+                  (objToStore.session.carrinho.semestre.descri_semestre || '').toUpperCase()
                 }}
               </div>
               <div class="col-12 mt-2" style="font-weight: bold">

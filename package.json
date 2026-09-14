@@ -3,8 +3,8 @@
     "version": "0.1.0",
     "private": true,
     "scripts": {
-        "serve": "SET NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service serve",
-        "build": "SET NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service build",
+        "serve": "node --openssl-legacy-provider ./node_modules/@vue/cli-service/bin/vue-cli-service.js serve",
+        "build": "node --openssl-legacy-provider ./node_modules/@vue/cli-service/bin/vue-cli-service.js build",
         "lint": "vue-cli-service lint",
         "push-dev": "npm run build && git add * && git commit -m 'ajustes' && git push origin main:dev"
     },

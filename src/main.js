@@ -12,6 +12,7 @@ import mask from 'string-mask'
 import VueTheMask from 'vue-the-mask'
 import ToastService from 'primevue/toastservice';
 import PrimeVue from 'primevue/config';
+import Shepherd from 'shepherd.js'
 
 import "primevue/resources/themes/saga-blue/theme.css"      //theme
 import "primevue/resources/primevue.min.css"                //core css
@@ -27,4 +28,5 @@ myApp.use(PrimeVue);
 myApp.use(router);
 myApp.use(store)
 myApp.use(VueTheMask);
+myApp.config.globalProperties.$shepherd = function (...args) { return new Shepherd.Tour(...args); }
 myApp.mount('#app')
