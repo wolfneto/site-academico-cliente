@@ -266,15 +266,23 @@ export default createStore({
       try {
         let retorno = await axios.get("/manutencao");
         retorno = crypto.decrypt(retorno.data, true);
-        let ip_liberado = await axios.get("/ip_liberado");
-        ip_liberado = crypto.decrypt(ip_liberado.data, true);
+
+        let ip_liberado = null;
+        try {
+          ip_liberado = await axios.get("/ip_liberado");
+          ip_liberado = crypto.decrypt(ip_liberado.data, true);
+        } catch (error) {
+          // /ip_liberado is optional for maintenance gating; keep site status from /manutencao.
+          ip_liberado = null;
+        }
+
         try {
           let store = local.get();
-          if (Object.hasOwn(store, "userIp")) {
+          if (ip_liberado && Object.hasOwn(store, "userIp")) {
             if (ip_liberado.ip == store.userIp.data) {
               retorno.acessoDental = true;
             }
-          } else {
+          } else if (ip_liberado) {
             let userIp = await axios.get("https://api.ipify.org", {
               withCredentials: false,
             });
