@@ -63,9 +63,9 @@
               : clickedFaculdade(faculdade)
             ">
           <div class="faculdade-background">
-            <img v-if="faculdade.imagem_path && !imageErrors[faculdade.id_faculdade]"
-              :src="'https://academicosolident.com.br/img/' + faculdade.imagem_path" alt="faculdade_imagem"
-              class="card-img-top" style="height: 90px; width: 150px" @error="handleImageError(faculdade.id_faculdade)" />
+            <img v-if="!imageErrors[faculdade.id_faculdade]"
+              :src="getFaculdadeImageSrc(faculdade)" alt="faculdade_imagem"
+              class="card-img-top" style="height: 90px; width: 150px" @error="handleImageError(faculdade)" />
             <div v-else class="faculdade-placeholder card-img-top"
               :style="{ backgroundColor: getPlaceholderColor(faculdade.nome_exibicao_faculdade) }">
               {{ getFaculdadeInitials(faculdade.nome_exibicao_faculdade) }}
@@ -325,6 +325,7 @@ export default {
     semestresTipo: [],
     isFocused: false,
     imageErrors: {},
+    imageStage: {},
   }),
   async created() {
     this.getSession();
@@ -411,8 +412,36 @@ export default {
       "set_ipBlocked",
     ]),
     ...mapActions(["get_faculdades", "get_semestres", "get_avisoGeral"]),
-    handleImageError(id) {
-      this.imageErrors = { ...this.imageErrors, [id]: true };
+    // Tenta imagem_path do banco, depois um arquivo em /img/faculdades/{slug}.png, senão mostra o placeholder.
+    slugifyFaculdadeNome(nome) {
+      if (!nome) return "";
+      return nome
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toLowerCase()
+        .trim()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/(^-|-$)/g, "");
+    },
+    getFaculdadeImageSrc(faculdade) {
+      const stage = this.imageStage[faculdade.id_faculdade] || 0;
+      if (stage === 0 && faculdade.imagem_path) {
+        return "https://academicosolident.com.br/img/" + faculdade.imagem_path;
+      }
+      return (
+        "https://academicosolident.com.br/img/faculdades/" +
+        this.slugifyFaculdadeNome(faculdade.nome_faculdade) +
+        ".png"
+      );
+    },
+    handleImageError(faculdade) {
+      const id = faculdade.id_faculdade;
+      const stage = this.imageStage[id] || 0;
+      if (stage === 0 && faculdade.imagem_path) {
+        this.imageStage = { ...this.imageStage, [id]: 1 };
+      } else {
+        this.imageErrors = { ...this.imageErrors, [id]: true };
+      }
     },
     getFaculdadeInitials(nome) {
       if (!nome) return "?";
