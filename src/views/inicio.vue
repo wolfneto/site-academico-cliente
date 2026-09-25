@@ -63,8 +63,13 @@
               : clickedFaculdade(faculdade)
             ">
           <div class="faculdade-background">
-            <img :src="'https://academicosolident.com.br/img/' + faculdade.imagem_path
-              " alt="faculdade_imagem" class="card-img-top" style="height: 90px; width: 150px" />
+            <img v-if="faculdade.imagem_path && !imageErrors[faculdade.id_faculdade]"
+              :src="'https://academicosolident.com.br/img/' + faculdade.imagem_path" alt="faculdade_imagem"
+              class="card-img-top" style="height: 90px; width: 150px" @error="handleImageError(faculdade.id_faculdade)" />
+            <div v-else class="faculdade-placeholder card-img-top"
+              :style="{ backgroundColor: getPlaceholderColor(faculdade.nome_exibicao_faculdade) }">
+              {{ getFaculdadeInitials(faculdade.nome_exibicao_faculdade) }}
+            </div>
           </div>
           <div @click.stop="" :id="'loader-' + faculdade.id_faculdade"></div>
           <div @click.stop="" v-if="faculdade.status != '0'" class="tipo-escolha align-items-start">
@@ -319,6 +324,7 @@ export default {
     especializacao: [],
     semestresTipo: [],
     isFocused: false,
+    imageErrors: {},
   }),
   async created() {
     this.getSession();
@@ -405,6 +411,21 @@ export default {
       "set_ipBlocked",
     ]),
     ...mapActions(["get_faculdades", "get_semestres", "get_avisoGeral"]),
+    handleImageError(id) {
+      this.imageErrors = { ...this.imageErrors, [id]: true };
+    },
+    getFaculdadeInitials(nome) {
+      if (!nome) return "?";
+      return nome.trim().split(/\s+/).filter(Boolean).slice(0, 2)
+        .map((w) => w[0].toUpperCase()).join("");
+    },
+    getPlaceholderColor(nome) {
+      const palette = ["#1976d2", "#388e3c", "#f57c00", "#7b1fa2", "#c2185b", "#0097a7", "#5d4037", "#455a64"];
+      if (!nome) return palette[0];
+      let hash = 0;
+      for (let i = 0; i < nome.length; i++) hash = nome.charCodeAt(i) + ((hash << 5) - hash);
+      return palette[Math.abs(hash) % palette.length];
+    },
     getSession() {
       this.objToStore = this.$LS.get();
       if (this.objToStore.shared.ajudaVisible != null) {
@@ -813,6 +834,16 @@ export default {
   height: 0;
   overflow: visible;
   transition: opacity 0.3s, color 2s;
+}
+
+.faculdade-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: bold;
+  font-size: 22px;
+  border-radius: 6px;
 }
 
 .faculdade-container-clicado>.faculdade-background {
