@@ -30,7 +30,7 @@
     </div>
     <div class="mb-2">
       CNPJ: 58.362.674/0001-16 <br>
-      Rua Turiassu, 681 - Perdizes - São Paulo - SP <br>
+      Rua do Seminário, 199, Sobreloja 2 - Centro - São Paulo - SP <br>
       contato@academicosolident.com.br <br>
       (11) 2574-7951 <br>
       Copyright © DentalSolident. Todos Direitos Reservados.
