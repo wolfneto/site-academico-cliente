@@ -366,7 +366,7 @@ export default {
       if (this.search != "") {
         return faculdadesFiltradas.filter(
           (faculdade) =>
-            faculdade.nome_exibicao_faculdade
+            (faculdade.nome_exibicao_faculdade || "")
               .toLowerCase()
               .replace(/\s/g, "")
               .normalize("NFD")
@@ -378,7 +378,7 @@ export default {
                   .normalize("NFD")
                   .replace(/[\u0300-\u036f]/g, "")
               ) ||
-            faculdade.sigla
+            (faculdade.sigla || "")
               .toLowerCase()
               .replace(/\s/g, "")
               .normalize("NFD")
